@@ -6,7 +6,7 @@ Claude Code plugin marketplace for the Context Engine system.
 
 ```bash
 # In Claude Code:
-/plugin marketplace add path/to/this/repo
+/plugin marketplace add github.com/rghsoftware/context-engine
 /plugin install context-engine@context-engine-marketplace
 ```
 
