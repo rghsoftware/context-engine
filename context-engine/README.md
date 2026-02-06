@@ -20,8 +20,8 @@ A Claude Code plugin for structured feature development across multiple tech sta
 
 ```bash
 # In Claude Code:
-/plugin marketplace add github.com/rghsoftware/context-engine
-/plugin install context-engine@context-engine-marketplace
+/plugin marketplace add rghsoftware/context-engine
+/plugin install context-engine@context-engine
 ```
 
 ### From local directory
@@ -30,7 +30,7 @@ A Claude Code plugin for structured feature development across multiple tech sta
 # Clone the repo, then in Claude Code:
 git clone https://github.com/rghsoftware/context-engine.git
 /plugin marketplace add /path/to/context-engine
-/plugin install context-engine@context-engine-marketplace
+/plugin install context-engine@context-engine
 ```
 
 ## Setup per project
