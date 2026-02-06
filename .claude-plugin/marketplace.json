@@ -1,0 +1,13 @@
+{
+  "name": "context-engine-marketplace",
+  "owner": {
+    "name": "Your Name"
+  },
+  "plugins": [
+    {
+      "name": "context-engine",
+      "source": "./context-engine",
+      "description": "Multi-stack context engineering: 4-phase planning, ADR tracking, drift prevention, per-stack quality agents"
+    }
+  ]
+}

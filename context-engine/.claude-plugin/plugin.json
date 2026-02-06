@@ -1,0 +1,8 @@
+{
+  "name": "context-engine",
+  "description": "Multi-stack context engineering: 4-phase planning, ADR tracking with contradiction detection, spec drift prevention, and per-stack quality agents.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Your Name"
+  }
+}
