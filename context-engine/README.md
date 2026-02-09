@@ -14,6 +14,8 @@ A Claude Code plugin for structured feature development across multiple tech sta
 
 **Test & doc task generation** — Implementation steps automatically include paired test tasks (S###-T) and documentation tasks (S###-D).
 
+**Review workflow** — Capture review findings to disk (survives context compaction), resolve them by category in a fresh session, and verify all resolutions before merge.
+
 ## Install
 
 ### From GitHub
@@ -50,12 +52,13 @@ directory, generates a starter `CLAUDE.md`, and sets up auto-formatting hooks.
 - `.claude/hooks/post-edit-lint.sh` — Auto-format on save
 - `Context/Features/` — Feature planning artifacts
 - `Context/Decisions/` — Architecture Decision Records
+- `Context/Reviews/` — Code review findings and resolutions
 - `Context/Backlog/` — Ideas and bug tracking
 - `CLAUDE.md` — Project overview
 
 **What the plugin provides (global):**
-- 10 skills (planning, implementation, ADR, backlog)
-- 7 agents (task completion, ADR consistency, 5× stack QA)
+- 12 skills (planning, implementation, ADR, backlog, review)
+- 8 agents (task completion, ADR consistency, review verification, 5× stack QA)
 - The init command
 
 ## Usage
@@ -101,6 +104,28 @@ Review ADRs and check for drift
 Run the Python quality check on the backend changes
 ```
 
+### Capture and resolve review findings
+
+After running QA agents or receiving manual feedback:
+
+```
+Capture these review findings
+```
+
+Then in a fresh session:
+
+```
+Resolve the review
+```
+
+Claude works through findings by category: fixes code issues, creates tasks in
+Steps.md, coordinates ADR creation for architectural concerns, and updates rule files
+for convention gaps. Finally:
+
+```
+Verify the review
+```
+
 ### Commit
 
 ```
@@ -125,6 +150,8 @@ Claude formats code, builds a conventional commit message with task/ADR referenc
 | adr-review | Full ADR consistency and spec drift review |
 | backlog-add | Add ideas or bugs to backlog |
 | backlog-prioritize | Review and prioritize backlog |
+| review-capture | Persist review findings to disk in triaged format |
+| review-resolve | Work through captured findings, resolve by category |
 
 ### Agents (invoked for validation and quality)
 
@@ -132,6 +159,7 @@ Claude formats code, builds a conventional commit message with task/ADR referenc
 |---|---|
 | check-task-completion | Milestone validation: stubs, tests, docs, drift |
 | check-adr-consistency | ADR contradiction and staleness detection |
+| review-verify | Verify all review findings resolved before merge |
 | qa-python | Python/FastAPI: ruff, mypy, bandit, pattern checks |
 | qa-vue | Vue/TypeScript: eslint, prettier, vue-tsc, a11y |
 | qa-rust | Rust/Tauri: clippy, rustfmt, cargo audit, safety |
@@ -191,10 +219,13 @@ context-engine/                    ← This plugin
 │   ├── adr-review/SKILL.md
 │   ├── backlog-add/SKILL.md
 │   ├── backlog-prioritize/SKILL.md
+│   ├── review-capture/SKILL.md
+│   ├── review-resolve/SKILL.md
 │   └── project-init/SKILL.md     ← Templates for init command
 └── agents/
     ├── check-task-completion.md
     ├── check-adr-consistency.md
+    ├── review-verify.md
     ├── qa-python.md
     ├── qa-vue.md
     ├── qa-rust.md
